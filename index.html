@@ -1,0 +1,295 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>my dashboard</title>
+	<link rel="stylesheet" href="css/dashboard style.css">
+	<script src="js/dashboard JS.js"></script>
+</head>
+
+<body>
+	<body>
+	<main class="page-wrapper clearfix">
+		<section class="page-menu">
+			<div class="VDC-banner">
+				<img src="images/VDC_logo-04.png" width="300" height="140" alt="">
+			</div>
+			<div class="user-menu">
+				<img src="images/profile_n_menu-05.png" height="421" width="38" alt="">
+				<div class="user-info">
+					<h2>Xipei Ren</h2>
+					<button class="user-logout" onclick="location.href='dashboard_indx.html'" type="button">logout</button>
+				</div>
+
+				<nav class="nav-bar">
+					<ul>
+						<li><a href="dashboard_XP.html">
+							dashboard <hr style="border: 2px thin #0099DC;" />
+							</a>
+							
+						</li>
+						<li><a href="" style="font-weight: lighter">
+							my datasets <hr class="line-hover" style="border: .5px dashed #0099DC;" />
+							</a>
+						</li>
+						<li><a href="" style="font-weight: lighter">
+							my projects <hr class="line-hover" style="border: .5px dashed #0099DC;" />
+							</a>
+						</li>
+						<li><a href="">
+							data sharing <hr class="line-hover" style="border: .5px dashed #0099DC;" />
+							</a>
+						</li>
+						<li><a href="">
+							settings <hr class="line-hover" style="border: .5px dashed #0099DC;" />
+							</a>
+						</li>
+					</ul>
+				</nav>
+			</div>
+			<div class="VDC-contact">
+				<p>VDC collaborators :</p>
+				<div class="VDC-support">
+					<img src="images/tue-umcu-uu-logos-300x97.png" width="280" alt="">
+				</div>
+			</div>
+		</section>
+		<section class="dashboard-main">
+			<div class="search-engine">
+				<button type="submit" style="border: 1; background: white">
+					<img src="images/search-button-07.png" width="40" height="40" alt="">
+				</button>
+			<div class="search-bar">
+				<input type="text" placeholder="Search...">
+			</div>
+				
+			
+			<div class="filter">
+				<p>filter</p>
+				<img src="images/filter-icon-08.png" width="24" height="24" alt="">
+				<select name="aspect-of-data" id="data-aspect">
+					<option value="default">aspect of data</option>
+					<option value="behavioral-data">behavioral data</option>
+					<option value="environmental-data">environmental data</option>
+				</select>
+				<select name="type-of-data" id="data-type">
+					<option value="default">type of data</option>
+					<option value="survey-data">survey data</option>
+					<option value="interview-data">interview data</option>
+					<option value="sensor-data">sensor-collected data</option>
+					<option value="image-data">image data</option>
+				</select>
+				<select name="context-of-data" id="data-context">
+					<option value="default">context of data</option>
+					<option value="running">outdoor running data</option>
+					<option value="walking">outdoor walking data</option>
+					<option value="biking">outdoor biking data</option>
+				</select>
+				<select name="permission-of-data" id="data-permission">
+					<option value="default">permission of data</option>
+					<option value="open-data">open to access</option>
+					<option value="accessible-data">access data with permission</option>
+					<option value="close-data">close data (rediection required)</option>
+				</select>
+			</div>
+		</div>
+			<div class="data-index">
+				<div class="metadata-container">
+					<div class="metadata-column">
+						<div class="metadata-card">
+					<button onClick= "myFunction()" class="collapsible" id="btnTitle">+</button>
+					<div class="metadata-content"> 
+					<div class="data-title">
+						<img id="metadata-img" src="images/metadata-img-run-11.png" width="48" alt="">
+						<h4>Oct. 2019 <br> Eindhoven Marathon GPS track data </h4>
+					</div>
+					<div class="metadata-dsc" id="metadata-description">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+					<div class="metadata-link">
+						<button onClick="ToggleSRM()">ask for data access</button>
+						<li><a href="https://www.marathoneindhoven.nl" target="_blank">rediect to the original source</a></li>
+					</div>
+				</div>
+				</div>
+						<div class="metadata-card">
+					<button onClick= "myFunction1()" class="collapsible" id="btnTitle1">+</button>
+					<div class="metadata-content"> 
+					<div class="data-title">
+						<img id="metadata-img1" src="images/metadata-img-stretch.png" width="48" alt="">
+						<h4>Oct. 2017 <br>HealthSit follow-up questionnaire data </h4>
+					</div>
+					<div class="metadata-dsc" id="metadata-description1">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+					<div class="metadata-link">
+						<button>explore the dataset</button>
+						<button>add to a project</button>
+					</div>
+				</div>
+				</div>
+					</div>
+					<div class="metadata-column">
+						<div class="metadata-card">
+					<button onClick= "myFunction2()" class="collapsible" id="btnTitle2">+</button>
+					<div class="metadata-content"> 
+					<div class="data-title">
+						<img id="metadata-img2" src="images/metadata-img-run-11.png" width="48" alt="">
+						<h4>May. 2019 <br>Utrecht Marathon follow-up survey data  </h4>
+					</div>
+					<div class="metadata-dsc" id="metadata-description2">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+					<div class="metadata-link">
+						<button>explore the dataset</button>
+						<button>add to a project</button>
+						<li><a href="https://www.utrechtmarathon.com/editie-2019/"  target="_blank">rediect to the original source</a></li>
+					</div>
+				</div>
+				</div>
+						<div class="metadata-card">
+					<button onClick= "myFunction4()" class="collapsible" id="btnTitle4">+</button>
+					<div class="metadata-content"> 
+					<div class="data-title">
+						<img id="metadata-img4" src="images/metadata-img-bigdata-16.png" width="48" alt="">
+						<h4>Apr. 2019 <br>VDC researcher interview data  </h4>
+					</div>
+					<div class="metadata-dsc" id="metadata-description4">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+					<div class="metadata-link">
+						<button>explore the dataset</button>
+						<button>add to a project</button>
+					</div>
+				</div>
+				</div>
+						
+					</div>
+					<div class="metadata-column">
+						<div class="metadata-card">
+					<button onClick= "myFunction3()" class="collapsible" id="btnTitle3">+</button>
+					<div class="metadata-content"> 
+					<div class="data-title">
+						<img id="metadata-img3" src="images/metadata-img-air.png" width="48" alt="">
+						<h4>2017-2018 <br> air quality data of the Netherlands by RIVM</h4>
+					</div>
+					<div class="metadata-dsc" id="metadata-description3">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+					<div class="metadata-link">
+						<button onClick="ToggleSRM()">ask for data access</button>
+						<li><a href="https://www.rivm.nl/en/air" target = "_blank">rediect to the original source</a></li>
+					</div>
+				</div>
+				</div>
+						<div class="metadata-card">
+					<button onClick= "myFunction5()" class="collapsible" id="btnTitle5">+</button>
+					<div class="metadata-content"> 
+					<div class="data-title">
+						<img id="metadata-img5" src="images/metadata-img-senior.png" width="48" alt="">
+						<h4>2016-2018 <br>fitbit data of the Active Aging project </h4>
+					</div>
+					<div class="metadata-dsc" id="metadata-description5">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+					</div>
+					<div class="metadata-link">
+						<button onClick="ToggleSRM()">ask for data access</button>
+					</div>
+				</div>
+				</div>
+					</div>
+			</div>
+				<div class="add-data">
+				<button onClick="ToggleADM()">+</button>
+				<p>privacy policy  |  terms of service  |  help </p>
+			</div>
+			</div>
+		</section>
+	</main>
+	<div id="adddata-modal" class="modal">
+		<div class="modal-content">
+  		<div class="modal-header">
+   		    <h4>add a dataset to VDC</h4>
+  		</div>
+  		<div class="modal-body">
+			<p class="modal-dsct">basic information of this dataset:</p>
+			<div class="modal-select">
+				<select name="aspect-of-data" id="data-aspect-add">
+					<option value="default">aspect of data</option>
+					<option value="behavioral-data">behavioral data</option>
+					<option value="environmental-data">environmental data</option>
+				</select>
+				<select name="type-of-data" id="data-type-add">
+					<option value="default">type of data</option>
+					<option value="survey-data">survey data</option>
+					<option value="interview-data">interview data</option>
+					<option value="sensor-data">sensor-collected data</option>
+					<option value="image-data">image data</option>
+				</select>
+				<select name="context-of-data" id="data-context-add">
+					<option value="default">context of data</option>
+					<option value="running">outdoor running data</option>
+					<option value="walking">outdoor walking data</option>
+					<option value="biking">outdoor biking data</option>
+				</select>
+				</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">title:</p>
+				<input type="text" placeholder="title of the dataset...">
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">contributors:</p>
+				<input type="text" placeholder="add collaborators of this dataset">
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">project:</p>
+				<input type="text" placeholder="add associated projects to this dataset (if any)">
+			</div>
+			<p class="modal-dsct">description of this dataset:</p>
+			<textarea name="destxtbox" class="txt-box" cols="30" rows="10" placeholder="please describe the characteristics of this dataset"></textarea>
+			<p class="modal-dsct">data accessibility:</p>
+			<div class="modal-select">
+				<p class="modal-dscst">authorization to VDC admin</p>
+				<select name="dtac" id="dtacselect">
+					<option value="default">open-access to public</option>
+					<option value="semi-open">open-access to VDC researchers</option>
+					<option value="close">access upon request</option>
+					<option value="close">inaccessible to all</option>
+				</select>
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">external link:</p>
+				<input type="text" >
+			</div>
+			<p class="modal-dsct">upload the dataset:</p>
+			<button class="upldata">drag your file to here or click to browse </button>
+  		</div>
+  		<div class="modal-footer">
+			<button class="savModal" onClick="CloseADM()">save</button>
+    		<button class="cancModal" onClick="CloseADM()">cancel</button>
+			
+  		</div>
+	</div>
+	</div>
+	<div id="request-modal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>request this dataset</h4>
+			</div>
+			<div class="modal-body">
+				<div class="modal-txtin">
+					<p class="modal-dscst">subject:</p>
+					<input type="text" >
+				</div>
+				<textarea name="destxtbox" class="txt-box" cols="30" rows="10" placeholder="please describe your purpose of using this dataset"></textarea>
+			</div>
+			<div class="modal-footer">
+			<button class="savModal" onClick="CloseSRM()">send</button>
+    		<button class="cancModal" onClick="CloseSRM()">cancel</button>
+  		</div>
+		</div>
+	</div>
+</body>
+</body>
+</html>
