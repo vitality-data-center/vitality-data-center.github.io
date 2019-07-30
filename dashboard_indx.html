@@ -9,7 +9,6 @@
 </head>
 
 <body>
-	<body>
 	<main class="page-wrapper clearfix">
 		<section class="dashboard-main">
 			<h3>VDC is a data platform that supports you to save, find, share, and analyze vitality-related research data.</h3>
@@ -130,7 +129,9 @@
 			<div class="modal-txtin">
 				<input type="text" placeholder="password...">
 			</div>
+			<button class="user-register" onclick="location.href='index.html'" type="button">register at VDC</button>
 			<button class="user-logout" onclick="location.href='index.html'" type="button">login</button>
+				
 			</div>
 			<div class="VDC-contact">
 				<p>VDC collaborators :</p>
@@ -140,6 +141,25 @@
 			</div>
 		</section>
 	</main>
-</body>
+<!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAnFWUaEIrV3xJw2WyurvwoHeMXcZCximg",
+    authDomain: "vitality-data-center.firebaseapp.com",
+    databaseURL: "https://vitality-data-center.firebaseio.com",
+    projectId: "vitality-data-center",
+    storageBucket: "",
+    messagingSenderId: "390972550282",
+    appId: "1:390972550282:web:f8edfc51cfd43c47"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
 </body>
 </html>

@@ -270,6 +270,7 @@ body{
 	font-size: 10pt;
 	display: block;
 	padding-left: 25px;
+	padding-right: 25px;
 }
 
 .metadata-link a:hover{
