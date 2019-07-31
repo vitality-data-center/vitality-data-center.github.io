@@ -49,9 +49,24 @@ body{
 .user-menu h4{
 	margin-left: 35px;
 }
+
+.user-register{
+	margin-top: 35px;
+	height: 40px;
+	margin-left: 35px;
+	color: white;
+	font-size: 10pt;
+	background-color: transparent;
+	border-style: none;
+	text-decoration: underline;
+}
+.user-register:hover{
+	color: #0099DC; 
+}
 .user-logout{
-	width: 75px;
-	height: 25px;
+	width: 100px;
+	height: 40px;
+	font-size: 12pt;
 	margin-top: 35px;
 	right: 25px;
 	position: fixed;
@@ -211,6 +226,9 @@ body{
 .data-title{
 	font-size: 12pt;
 	font-weight: bold;
+}
+#register-div{
+	display: none;
 }
 
 #metadata-img, #metadata-img1, #metadata-img2, #metadata-img3, #metadata-img4, #metadata-img5{
