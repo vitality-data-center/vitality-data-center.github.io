@@ -178,10 +178,6 @@ function userInfoLoad(){
 		if (user != null){
 			var email_id = user.email;
 			document.getElementById("userAccount").innerHTML = email_id;
-			//get data
-			firebase.firestore().collection.('MetaData').get().then(snapshot =>{
-				console.log(snapshot.docs)
-			});
 		}
 	} else {
   	// No user is signed in.
