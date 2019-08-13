@@ -191,4 +191,9 @@ function logoutCheck(){
 
 }
 
+//get data
+firebase.firestore().collection.('MetaData').get().then(snapshot =>{
+	console.log(snapshot.docs);
+});
+
 
