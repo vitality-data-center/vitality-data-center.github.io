@@ -325,12 +325,11 @@ nav a:hover .line-hover{
 }
 
 #metadata-img, #metadata-img1, #metadata-img2, #metadata-img3, #metadata-img4, #metadata-img5{
-	display: none;
+	display: block;
 }
-.metadata-dsc{
-	display: none;
-}
+
 .metadata-dsc {
+	display: block;
 	margin-left: 20px;
 	margin-right: 20px;
 	margin-top: 40px;
