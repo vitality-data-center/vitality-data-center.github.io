@@ -3,7 +3,7 @@
 
 //user permission
 
-window.onload = firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
+/*window.onload = firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
   .then(function() {
     // Existing and future Auth states are now persisted in the current
     // session only. Closing the window would clear any existing state even
@@ -42,35 +42,61 @@ window.onload = firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SE
 	console.log("done");
     // New sign-in will be persisted with session persistence.
   });
+  
+  */
 
 function loginCheck(){
 	var userEmail = document.getElementById("email_field").value;
 	var userPss = document.getElementById("password_field").value;
 	
-	firebase.auth().signInWithEmailAndPassword(userEmail, userPss).catch(function(error) {
-		// Handle Errors here.
-  		var errorCode = error.code;
-		var errorMessage = error.message;
-		window.alert("Error : " + errorMessage);
-  		// ...
-	});
+	$.ajax({
+    url: 'http://131.155.21.235/api/v1/login',
+    type: 'POST',
+    data: {
+        'username': userEmail,
+        'password': userPss
+    },
+    headers: {
+        'api-key': '12345'
+    },
+    success: function (result) {
+        console.log(result);
+    },
+    error: function (error) {
+        console.error(error);
+    }
+});
 
 }
 
+// add a new user
 function createAccount(){
 	var newEmail = document.getElementById("create_email").value;
 	var newPss = document.getElementById("create_password").value;
-	firebase.auth().createUserWithEmailAndPassword(newEmail, newPss).catch(function(error) {
-		// Handle Errors here.
-  		var errorCode = error.code;
-		var errorMessage = error.message;
-		window.alert("Error : " + errorMessage);
-  		// ...
+	
+	$.ajax({
+    	url: ' http://131.155.21.235/api/v1/user/register',
+		type: 'POST',
+    	data: {
+        	'email': newEmail,
+        	'password': newPss,
+			're_password': newPss
+		},
+    	headers: {
+			'api-key': '12345'
+		},
+		success: function (result) {
+			console.log(result);
+		},
+		error: function (error) {
+			console.error(error);
+		}
 	});
+	
 }
 
 
-
+// update the user name
 function setUName(){
 	var user = firebase.auth().currentUser;
 	var newNam = document.getElementById("create_user_name").value;
@@ -91,17 +117,12 @@ function setUName(){
 	
 }
 
-
-
-
-
-	
-
+// logout from the current user
 function logoutCheck(){
 	firebase.auth().signOut();
 }
 
-
+// load user 
 function userInfoLoad(){
 	var user = firebase.auth().currentUser;
 	if (user) {
