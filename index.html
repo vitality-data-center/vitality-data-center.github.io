@@ -5,19 +5,28 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vitality Data Centre</title>
 	<link rel="stylesheet" href="css/dashboard style.css">
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="js/jquery-3.3.1.min.js" type="text/javascript"></script> 
+	<script src="js/js.cookie.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="js/dashboard JS.js"></script>
-	<script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
-	<script src="js/dashboard_api.js" type="text/javascript"></script>
+	<script>
+  $( function() {
+    $( '#mdTc' ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$( '#mdTf' ).datepicker({ dateFormat: 'yy-mm-dd' });
+  } );
+  </script>
 </head>
 	
-<body>
+<body onLoad="cookieCheck()">
 	<main class="page-wrapper-2 clearfix" id="unLogin">
 		<section class="start-menu">
 			<div class="VDC-banner_start">
 				<img src="images/VDC_logo-04.png" width="300" height="140" alt="">
 			</div>
 			<div id="login-div" class="user-menu_1">
-				<h4>Login your VDC account</h4>
+				<h4 id="loginCheck">Login your VDC account</h4>
 				<div class="start-txtin">
 					<input type="text" placeholder="registered email..." id="email_field">
 				</div>
@@ -30,13 +39,19 @@
 			<div id="register-div" class="user-menu_1">
 				<h4>Create a VDC account by filling info below:</h4>
 				<div class="start-txtin">
+					<input type="text" placeholder="your first name" id="create_fsName">
+				</div>
+				<div class="start-txtin">
+					<input type="text" placeholder="your last name" id="create_lsName">
+				</div>
+				<div class="start-txtin">
 					<input type="text" placeholder="your email address..." id="create_email">
 				</div>
 				<div class="start-txtin">
 					<input type="password" placeholder="your password..." id="create_password">
 				</div>
 				<div class="start-txtin">
-					<input type="password" placeholder="repeat your password...">
+					<input type="password" placeholder="repeat your password..." id="re_password">
 				</div>	
 				<button class="user-logout" onclick="createAccount()" type="button">Submit</button>
 				<button class="user-register" onclick="backtoLogin()" type="button">Cancel your registration at VDC</button>	
@@ -60,10 +75,11 @@
 			<div class="VDC-banner">
 				<img src="images/VDC_logo-04.png" width="300" height="140" alt="">
 			</div>
+			
 			<div class="user-menu">
 				<img src="images/profile_n_menu-05.png" height="421" width="38" alt="">
 				<div class="user-info">
-					<h2 id="userAccount" onMouseover = "userInfoLoad()">
+					<h2 id="userAccount">
 						Xipei Ren
 					</h2>
 					<button onclick="logoutCheck()" type="button">logout</button>
@@ -94,6 +110,18 @@
 					</ul>
 				</nav>
 			</div>
+			<!--
+			<form id="uploadDTFiles">
+					<input id="files" type="file" name="files" multiple required="" />
+					<textarea placeholder="File description" id="description" class="materialize-textarea" name="description" data-length="250" required=""></textarea>
+					<textarea placeholder="Participant ID" id="participant" class="materialize-textarea" name="participant" data-length="10" required=""></textarea>
+					<p>
+						<button name="submit" id="submitBtn">submit</button>
+					</p>
+			</form>
+			
+			<button id="dlBtn">download the data</button>
+			-->
 			<div class="VDC-contact">
 				<p>VDC collaborators :</p>
 				<div class="VDC-support">
@@ -101,7 +129,8 @@
 				</div>
 			</div>
 		</section>
-		<section class="dashboard-main">			
+		<section class="dashboard-main">
+			
 			<div class="search-engine">
 				<button type="submit" style="border: 1; background: white">
 					<img src="images/search-button-07.png" width="40" height="40" alt="">
@@ -109,7 +138,7 @@
 			<div class="search-bar">
 				<input type="text" placeholder="Search...">
 			</div>
-				
+			
 			
 			<div class="filter">
 				<p>filter</p>
@@ -141,9 +170,10 @@
 			</div>
 		</div>
 			
+			
 			<div class="data-index">
-				<div class="metadata-container">
-			</div>
+				<div class="metadata-container" id="mtdCard">
+				</div>
 				<div class="add-data">
 				<button onClick="ToggleADM()">+</button>
 				<li><a href="https://vitalityacademy.eu" target="_blank">privacy policy  |  terms of service  |  help</a></li>
@@ -160,57 +190,64 @@
 			<p class="modal-dsct">basic information of this dataset:</p>
 			<div class="modal-select">
 				<select name="aspect-of-data" id="data-aspect-add">
-					<option value="default">data type</option>
-					<option value="behavior">behavioral data</option>
-					<option value="environment">environmental data</option>
-					<option value="default">other</option>
+					<option value="COMPLETE">data type</option>
+					<option value="COMPLETE">text/image data</option>
+					<option value="MOVEMENT">gpx/xml data</option>
+					<option value="MEDIA">media data</option>
 				</select>
 				<select name="type-of-data" id="data-type-add">
 					<option value="default">collection method</option>
-					<option value="survey">survey data</option>
-					<option value="interview">interview data</option>
-					<option value="sensor">sensor-collected data</option>
-					<option value="image">image data</option>
+					<option value="survey">survey</option>
+					<option value="interview">interview</option>
+					<option value="sensor">sensor</option>
 					<option value="default">other</option>
 				</select>
 				<select name="context-of-data" id="data-context-add">
-					<option value="default">vitality context</option>
-					<option value="running">outdoor running data</option>
-					<option value="walking">outdoor walking data</option>
-					<option value="biking">outdoor biking data</option>
-					<option value="default">other</option>
+					<option value="vatility">vitality context</option>
+					<option value="running">outdoor running</option>
+					<option value="walking">outdoor walking</option>
+					<option value="biking">outdoor biking</option>
+					<option value="vatility">general vitality</option>
 				</select>
 				</div>
 			<div class="modal-txtin">
-				<p class="modal-dscst">title:</p>
+				<p class="modal-dscst">dataset title:</p>
 				<input type="text" id="MDtitle" placeholder="title of the dataset...">
 			</div>
 			<div class="modal-txtin">
-				<p class="modal-dscst">contributors:</p>
-				<input type="text" placeholder="add collaborators of this dataset">
+				<p class="modal-dscst">dataset owner:</p>
+				<input type="text" id="MDorg" placeholder="add collaborators of this dataset">
 			</div>
 			<div class="modal-txtin">
-				<p class="modal-dscst">time created:</p>
-				<input type="text" id="mdTc" placeholder="When was this dataset created?">
+				<p class="modal-dscst">time created: </p>
+				<input type="text" id="mdTc">
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">time finished: </p>
+				<input type="text" id="mdTf">
 			</div>
 			<p class="modal-dsct">description of this dataset:</p>
 			<textarea name="destxtbox" id="mdDes" class="txt-box" cols="30" rows="10" placeholder="please describe the characteristics of this dataset"></textarea>
 			<p class="modal-dsct">data accessibility:</p>
 			<div class="modal-select">
-				<p class="modal-dscst">authorization to VDC admin</p>
+				<p class="modal-dscst">I would like to keep this dataset open access.</p>
 				<select name="dtac" id="dtacselect">
-					<option value="true">open-access to public</option>
-					<option value="true">open-access to VDC researchers</option>
-					<option value="false">access upon request</option>
-					<option value="false">inaccessible to all</option>
+					<option value="true">Yes</option>
+					<option value="false">No</option>
+				<!--	<option value="true">open-access to VDC researchers.</option>
+					
+					<option value="false">inaccessible to all.</option>
+				-->
 				</select>
 			</div>
 			<div class="modal-txtin">
-				<p class="modal-dscst" >external link:</p>
-				<input type="text" id="mdEL" >
+				<p class="modal-dscst" >original resource/unique identifier (if applicable):</p>
+				<input type="text" id="mdEL" placeholder="if the dataset is acquired from a third party.">
 			</div>
+			<!--
 			<p class="modal-dsct">upload the dataset:</p>
-			<button class="upldata">drag your file to here or click to browse </button>
+			<button class="upldata">drag your file to here or click to browse </button>	
+			-->
   		</div>
   		<div class="modal-footer">
 			<button class="savModal" onClick="UploadMD()">save</button>
@@ -222,20 +259,37 @@
 	<div id="request-modal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h4>request this dataset</h4>
+				<h4 id="UDTitle">Upload new data file(s)</h4>
+			</div>
+			<form id="uploadDTFiles">
+				<div class="modal-body">
+					<input class="modal-dscst" id="files" type="file" name="files" multiple required="" />
+					<textarea placeholder="File description" id="description" class="txt-box" name="description" data-length="250" required=""></textarea>
+					<input type="text" class="modal-txtin" placeholder="Participant ID, mandatory information for xml/gpx file." id="participant" name="participant" data-length="10" required="">
+				</div>
+				<div class="modal-footer">
+					<button class="savModal" name="submit" id="submitBtn">submit</button>
+					<button class="cancModal" onClick="CloseSRM()">done</button>
+					<div class="percent" id="ulstate"></div >
+				</div>	
+			</form>
+		</div>
+	</div>
+	<div id="download-modal" class="modal">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4>Donwload data file(s)</h4>
 			</div>
 			<div class="modal-body">
-				<div class="modal-txtin">
-					<p class="modal-dscst">subject:</p>
-					<input type="text" >
-				</div>
-				<textarea name="destxtbox" class="txt-box" cols="30" rows="10" placeholder="please describe your purpose of using this dataset"></textarea>
+				<table class="DLTable">
+				</table>
 			</div>
 			<div class="modal-footer">
-			<button class="savModal" onClick="CloseSRM()">send</button>
-    		<button class="cancModal" onClick="CloseSRM()">cancel</button>
-  		</div>
+				<button class="cancModal" onClick="CloseDLM()">cancel</button>
+			</div>	
 		</div>
 	</div>
 </body>
+	<script src="js/dashboard_api.js" type="text/javascript"></script>
+
 </html>

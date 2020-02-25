@@ -13,27 +13,18 @@ function CloseADM() {
   modal.style.display = "none";
 }
 
+
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   var modal = document.getElementById("adddata-modal");
-	var modal2 = document.getElementById("request-modal");
   if (event.target === modal) {
     modal.style.display = "none";
-  }
- if (event.target === modal2) {
-    modal2.style.display = "none";
   }
 };
 
 function ToggleSRM() {
   var modal = document.getElementById("request-modal");
   modal.style.display = "block";
-}
-
-// When the user clicks on <span> (x), close the modal
-function CloseSRM() {
-  var modal = document.getElementById("request-modal");
-  modal.style.display = "none";
 }
 
 function newAccount(){
