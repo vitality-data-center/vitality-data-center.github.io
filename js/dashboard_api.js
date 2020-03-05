@@ -281,7 +281,7 @@ function userInfoLoad(){
 						</div>
 						<div class="metadata-dsc">
 							<p>
-							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
+							<b>Description:</b><br>${sgDataset[n[4]]}<br><br>
 							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
 							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
 							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
@@ -311,7 +311,7 @@ function userInfoLoad(){
 						</div>
 						<div class="metadata-dsc">
 							<p>
-							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
+							<b>Description:</b><br>${sgDataset[n[4]]}<br><br>
 							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
 							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
 							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
@@ -327,7 +327,7 @@ function userInfoLoad(){
 			`;
 		}
 	html += li;
-	
+	document.querySelector(".metadata-container").innerHTML = html;	
     },
     error: function (error) {
         console.error(error);
@@ -337,7 +337,7 @@ function userInfoLoad(){
 				
 			
 		});
-	document.querySelector(".metadata-container").innerHTML = html;		
+		
     },
     error: function (error) {
         console.error(error);
@@ -734,7 +734,7 @@ function datainfoload(val){
 						</div>
 						<div class="metadata-dsc">
 							<p>
-							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
+							<b>Description:</b><br>${sgDataset[n[4]]}<br><br>
 							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
 							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
 							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
@@ -760,7 +760,7 @@ function datainfoload(val){
 						</div>
 						<div class="metadata-dsc">
 							<p>
-							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
+							<b>Description:</b><br>${sgDataset[n[4]]}<br><br>
 							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
 							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
 							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
