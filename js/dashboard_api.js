@@ -327,7 +327,7 @@ function userInfoLoad(){
 			`;
 		}
 	html += li;
-	document.querySelector(".metadata-container").innerHTML = html;	
+	
     },
     error: function (error) {
         console.error(error);
@@ -337,7 +337,7 @@ function userInfoLoad(){
 				
 			
 		});
-		
+	document.querySelector(".metadata-container").innerHTML = html;		
     },
     error: function (error) {
         console.error(error);
