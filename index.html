@@ -15,6 +15,8 @@
   $( function() {
     $( '#mdTc' ).datepicker({ dateFormat: 'yy-mm-dd' });
 	$( '#mdTf' ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$( '#mdTc-edit' ).datepicker({ dateFormat: 'yy-mm-dd' });
+	$( '#mdTf-edit' ).datepicker({ dateFormat: 'yy-mm-dd' });
   } );
   </script>
 </head>
@@ -71,6 +73,7 @@
 		</section>
 	</main>
 	<main class="page-wrapper clearfix" id="loginUser">
+		<!--
 		<section class="page-menu">
 			<div class="VDC-banner">
 				<img src="images/VDC_logo-04.png" width="300" height="140" alt="">
@@ -110,7 +113,6 @@
 					</ul>
 				</nav>
 			</div>
-			<!--
 			<form id="uploadDTFiles">
 					<input id="files" type="file" name="files" multiple required="" />
 					<textarea placeholder="File description" id="description" class="materialize-textarea" name="description" data-length="250" required=""></textarea>
@@ -121,7 +123,7 @@
 			</form>
 			
 			<button id="dlBtn">download the data</button>
-			-->
+			
 			<div class="VDC-contact">
 				<p>VDC collaborators :</p>
 				<div class="VDC-support">
@@ -129,20 +131,49 @@
 				</div>
 			</div>
 		</section>
+		-->
 		<section class="dashboard-main">
-			
 			<div class="search-engine">
+				<div class="VDC-banner">
+					<img src="images/VDC_logo-04.png" width="150" height="70" alt="">
+				</div>
+				<div class="banner-div">
+					
+				</div>
+				
+				<!--
 				<button type="submit" style="border: 1; background: white">
 					<img src="images/search-button-07.png" width="40" height="40" alt="">
 				</button>
-			<div class="search-bar">
-				<input type="text" placeholder="Search...">
-			</div>
-			
+				<div class="search-bar">
+					<input type="text" placeholder="Search...">
+				</div>
+				-->
 			
 			<div class="filter">
+				<!--
 				<p>filter</p>
 				<img src="images/filter-icon-08.png" width="24" height="24" alt="">
+				-->
+				<label class="container">my datasets
+  					<input type="radio" checked="checked" name="radio" onclick="userInfoLoad()" >
+  					<span class="checkmark"></span>
+				</label>
+				<div class="banner-div2">
+				</div>
+				<label class="container">all
+  					<input type="radio" name="radio" onclick="datainfoload(valData3)" >
+  					<span class="checkmark"></span>
+				</label>
+				<label class="container">gpx/xml
+  					<input type="radio" name="radio" onclick="datainfoload(valData2)" >
+  					<span class="checkmark"></span>
+				</label>
+				<label class="container">image/text
+  					<input type="radio" name="radio" onclick="datainfoload(valData1)" >
+  					<span class="checkmark"></span>
+				</label>
+				<!--
 				<select name="aspect-of-data" id="data-aspect">
 					<option value="default">aspect of data</option>
 					<option value="behavioral">behavioral data</option>
@@ -167,7 +198,18 @@
 					<option value="accessible-data">access data with permission</option>
 					<option value="close-data">close data (rediection required)</option>
 				</select>
+				-->
+				<div class="banner-div3">
+				</div>
+				
+
+				<img class="profile-img" src="images/user profile-04.png" height="38" width="38" alt="">
+				<h2 class="profile-id" id="userAccount">
+				Xipei Ren
+				</h2>
+				<button onclick="logoutCheck()" type="button">logout</button>
 			</div>
+			
 		</div>
 			
 			
@@ -193,7 +235,6 @@
 					<option value="COMPLETE">data type</option>
 					<option value="COMPLETE">text/image data</option>
 					<option value="MOVEMENT">gpx/xml data</option>
-					<option value="MEDIA">media data</option>
 				</select>
 				<select name="type-of-data" id="data-type-add">
 					<option value="default">collection method</option>
@@ -232,8 +273,8 @@
 			<div class="modal-select">
 				<p class="modal-dscst">I would like to keep this dataset open access.</p>
 				<select name="dtac" id="dtacselect">
-					<option value="true">Yes</option>
-					<option value="false">No</option>
+					<option value ="true">Yes</option>
+					<option value ="false">No</option>
 				<!--	<option value="true">open-access to VDC researchers.</option>
 					
 					<option value="false">inaccessible to all.</option>
@@ -256,6 +297,72 @@
   		</div>
 	</div>
 	</div>
+
+	<div id="editdata-modal" class="modal">
+		<div class="modal-content">
+  		<div class="modal-header">
+   		    <h4>edit the dataset</h4>
+  		</div>
+  		<div class="modal-body">
+			<p class="modal-dsct">basic information of this dataset:</p>
+			<div class="modal-select">
+				<select name="aspect-of-data" id="data-aspect-edit">
+					<option value="COMPLETE">text/image data</option>
+					<option value="MOVEMENT">gpx/xml data</option>
+				</select>
+				<select name="type-of-data" id="data-type-edit">
+					<option value="survey">survey</option>
+					<option value="interview">interview</option>
+					<option value="sensor">sensor</option>
+					<option value="default">other</option>
+				</select>
+				<select name="context-of-data" id="data-context-edit">
+					<option value="running">outdoor running</option>
+					<option value="walking">outdoor walking</option>
+					<option value="biking">outdoor biking</option>
+					<option value="vatility">general vitality</option>
+				</select>
+				</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">dataset title:</p>
+				<input type="text" id="MDtitle-edit" placeholder="title of the dataset...">
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">dataset owner:</p>
+				<input type="text" id="MDorg-edit" placeholder="add collaborators of this dataset">
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst-edit">time created: </p>
+				<input type="text" id="mdTc-edit">
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst">time finished: </p>
+				<input type="text" id="mdTf-edit">
+			</div>
+			<p class="modal-dsct">description of this dataset:</p>
+			<textarea name="destxtbox" id="mdDes-edit" class="txt-box" cols="30" rows="10" placeholder="please describe the characteristics of this dataset"></textarea>
+			<p class="modal-dsct">data accessibility:</p>
+			<div class="modal-select">
+				<p class="modal-dscst">I would like to keep this dataset open access.</p>
+				<select name="dtac" id="dtacselect-edit">
+					<option value= "true">Yes</option>
+					<option value= "false">No</option>
+				</select>
+				<input type="checkbox" id="yourCheckBoxId" checked>
+			</div>
+			<div class="modal-txtin">
+				<p class="modal-dscst" >original resource/unique identifier (if applicable):</p>
+				<input type="text" id="mdEL-edit" placeholder="if the dataset is acquired from a third party.">
+			</div>
+  		</div>
+  		<div class="modal-footer">
+			<button class="savModal" onClick="editMD()">save</button>
+    		<button class="cancModal" onClick="CloseEDM()">cancel</button>
+			
+  		</div>
+		</div>
+	</div>
+
 	<div id="request-modal" class="modal">
 		<div class="modal-content">
 			<div class="modal-header">

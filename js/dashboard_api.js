@@ -48,6 +48,10 @@
 var api_token;
 var upload_token;
 
+var valData1 = "complete";
+var valData2 = "movement";
+var valData3 = "all";
+
 function cookieCheck(){
 	var a = Cookies.get('usname');
 	var b = Cookies.get('uspass');
@@ -230,6 +234,7 @@ function userInfoLoad(){
 		'api-token': api_token
     },
     success: function (result) {
+		console.log(result);
 		var secondKey = Object.keys(result)[1];
 		//console.log(result[secondKey]);
 		var dataID = result[secondKey];
@@ -249,37 +254,39 @@ function userInfoLoad(){
 		console.log(allDatasets[datasetKey]);
 		var sgDataset = allDatasets[datasetKey];  
 		//0 dataset ID; 1 title; 2 type; 3 target; 4 description; 5 keywords; 6 doi; 7 relation; 8 organization;
-		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 project ID;
+		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 public/unpublic; 16 project ID;
 		var n = Object.keys(sgDataset);
 		var d = new Date(sgDataset[n[13]]);
 		var d2 = new Date(sgDataset[n[11]]);
 		var d1 = new Date(sgDataset[n[12]]);
-		var stDate = d1.getDate() + "-" + (d1.getMonth()+1) + "-" + d1.getFullYear();
-		var edDate = d.getDate() + "-" + (d.getMonth()+1) + "-" + d.getFullYear();
-		var ulDate = d2.getDate() + "-" + (d2.getMonth()+1) + "-" + d2.getFullYear();
+		var stDate = d1.getFullYear() + "-" + (d1.getMonth()+1) + "-" + d1.getDate();
+		var edDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+		var ulDate = d2.getFullYear() + "-" + (d2.getMonth()+1) + "-" + d2.getDate();
 		var dlInfo;
 		var li;
-		if (sgDataset[n[16]] == null || sgDataset[n[16]].length == 0){
+		if (sgDataset[n[17]] == null || sgDataset[n[17]].length == 0){
 			dlInfo = "no dataset uploaded yet...";
 			 li = `        								
 				<div class="metadata-card">
 					<div class="collapsible">
+						<div class="editModal" onClick="ToggleEDM(${sgDataset[n[0]]})"></div>
+						<img class="metaFig" src= ${"images/" + sgDataset[n[15]] + ".png"} height="27" alt="">
 						<img class="metaFig" src= ${"images/" + sgDataset[n[9]] + ".png"} height="27" alt="">
-						<img class="metaFig" src= ${"images/" + sgDataset[n[8]] + ".png"} height="27" alt="">
 						<img class="metaFig" src= ${"images/"+ sgDataset[n[2]] +".png"} height="27" alt="">
 					</div>
 					<div class="metadata-content"> 
 						<div class="data-title">
-							<img src= ${"images/" + sgDataset[n[5]] + ".png"} width="48" alt="">
+							<img src= ${"images/" + sgDataset[n[5]] + ".png"} width="60" alt="">
 							<h4>${sgDataset[n[1]]}</h4>
 						</div>
-						<div class="metadata-dsc" id="metadata-description5">
-							<b>Description:</b><br>${sgDataset[n[4]]}<br><br>
+						<div class="metadata-dsc">
+							<p>
+							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
 							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
 							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
 							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
 							<b>Original resource/unique identifier:</b><br><a href= ${sgDataset[n[6]]} target="_blank">${sgDataset[n[6]]}</a><br><br>
-							<p>${dlInfo}</p>		
+							${dlInfo}</p>	
 						</div>
 						<div class="metadata-link">
 							<button id=${"btn" + sgDataset[n[0]]} onClick="ToggleSRM(${sgDataset[n[0]]})">Upload file(s)</button>
@@ -288,26 +295,28 @@ function userInfoLoad(){
 				</div>
 			`;
 		} else {
-			dlInfo = sgDataset[n[16]].length + " dataset(s) have been uploaded";
+			dlInfo = sgDataset[n[17]].length + " dataset(s) have been uploaded";
 			 li = `        								
 				<div class="metadata-card">
 					<div class="collapsible">
+						<div class="editModal" onClick="ToggleEDM(${sgDataset[n[0]]})"></div>
+						<img class="metaFig" src= ${"images/" + sgDataset[n[15]] + ".png"} height="27" alt="">
 						<img class="metaFig" src= ${"images/" + sgDataset[n[9]] + ".png"} height="27" alt="">
-						<img class="metaFig" src= ${"images/" + sgDataset[n[8]] + ".png"} height="27" alt="">
 						<img class="metaFig" src= ${"images/"+ sgDataset[n[2]] +".png"} height="27" alt="">
 					</div>
 					<div class="metadata-content"> 
 						<div class="data-title">
-							<img src= ${"images/" + sgDataset[n[5]] + ".png"} width="48" alt="">
+							<img src= ${"images/" + sgDataset[n[5]] + ".png"} width="60" alt="">
 							<h4>${sgDataset[n[1]]}</h4>
 						</div>
-						<div class="metadata-dsc" id="metadata-description5">
-							<b>Description:</b><br>${sgDataset[n[4]]}<br><br>
+						<div class="metadata-dsc">
+							<p>
+							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
 							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
 							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
 							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
 							<b>Original resource/unique identifier:</b><br><a href= ${sgDataset[n[6]]} target="_blank">${sgDataset[n[6]]}</a><br><br>
-							<p>${dlInfo}</p>
+							${dlInfo}</p>
 						</div>
 						<div class="metadata-link">
 							<button onClick = "ToggleDLM(${sgDataset[n[0]]})">Download file(s)</button>
@@ -322,6 +331,7 @@ function userInfoLoad(){
     },
     error: function (error) {
         console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
     }
 });
 				
@@ -331,11 +341,109 @@ function userInfoLoad(){
     },
     error: function (error) {
         console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
     }
 });
 
 }
 
+//
+function ToggleEDM(getData){
+	var modal = document.getElementById("editdata-modal");
+	modal.style.display = "block";
+	upload_token = getData
+	$.ajax({
+    url: 'https://131.155.21.235/api/v1/datasets/' + getData, //the id of the dataset
+    type: 'GET',
+    headers: {
+        'api-key': '12345',
+        'api-token': api_token
+    },
+    success: function (data) {
+		var datasetKey = Object.keys(data)[1];
+		var sgDataset = data[datasetKey];  
+		//0 dataset ID; 1 title; 2 type; 3 target; 4 description; 5 keywords; 6 doi; 7 relation; 8 organization;
+		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 project ID;
+		var n = Object.keys(sgDataset);
+		var d = new Date(sgDataset[n[13]]);
+		var d1 = new Date(sgDataset[n[12]]);
+		var stDate = d1.getFullYear() + "-" + (d1.getMonth()+1) + "-" + d1.getDate();
+		var edDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+		//var d = sgDataset[n[17]];
+		document.getElementById("data-aspect-edit").value = sgDataset[n[2]];
+		document.getElementById("data-type-edit").value = sgDataset[n[9]];
+		document.getElementById("data-context-edit").value = sgDataset[n[5]];
+		document.getElementById("MDtitle-edit").value = sgDataset[n[1]];
+		document.getElementById("MDorg-edit").value = sgDataset[n[7]];
+		document.getElementById("mdDes-edit").value = sgDataset[n[4]];
+		//document.getElementById("dtacselect-edit").value = sgDataset[n[15]];
+		document.getElementById("mdEL-edit").value = sgDataset[n[6]];
+		document.getElementById("yourCheckBoxId").checked = sgDataset[n[15]];
+		document.getElementById("mdTc-edit").value = stDate;
+		document.getElementById("mdTf-edit").value = edDate;
+    },
+    error: function (error) {
+        console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
+    }
+});
+
+}
+//
+
+function editMD(){
+	var mdContext = document.getElementById("data-aspect-edit").value;
+	var mdMeans = document.getElementById("data-type-edit").value;
+	var mdActivity = document.getElementById("data-context-edit").value;
+	var mdTitle = document.getElementById("MDtitle-edit").value;
+	var mdRel = document.getElementById("MDorg-edit").value;
+	var mdDesc = document.getElementById("mdDes-edit").value;
+	var mdPermi = document.getElementById("dtacselect-edit").value;
+	var mdExtLink = document.getElementById("mdEL-edit").value;
+	var mdTimeC = $('#mdTc-edit').datepicker({ dateFormat: 'yy-mm-dd' }).val();
+	var mdTimef = $( '#mdTf-edit' ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
+	var checkX = false;
+	if ($("yourCheckBoxId").is(":checked")){
+		checkX = true;
+	} else {
+		checkX = false;
+	}
+
+	$.ajax({
+    url: 'https://131.155.21.235/api/v1/datasets/edit/' + upload_token,
+    type: 'POST',
+    data: {
+        'project_id': '', // id of project this dataset will be linked to, can be empty if there is only project for this user
+		'dataset_name': mdTitle,
+        'dataset_type': mdContext, // or 'COMPLETE'
+        'target_object': '', // for LINKED datasets
+        'description': mdDesc, // max 1000 characters
+        'start-date': mdTimeC +' 12:12:12', // format: yyyy-MM-dd HH:mm:ss
+        'isPublic': false, //(mdPermi === "true"), // or false
+        'end-date': mdTimef +' 12:12:12', // format: yyyy-MM-dd HH:mm:ss
+        'keywords': mdActivity, // comma-separated, max 255 characters
+        'doi': mdExtLink, // the digital object identifier of this dataset, if available
+        'relation': mdRel, // refer to a related dataset, publication or journal article
+        'organization': 'VitalityDataCentre', // organizations involved in this project / dataset creation
+        'remarks': mdMeans // max 1000 characters
+    },
+    headers: {
+        'api-key': '12345',
+		'api-token': api_token
+    },
+    success: function (result) {
+        console.log(result);
+		var modal = document.getElementById("editdata-modal");
+		modal.style.display = "none";
+		userInfoLoad();
+    },
+    error: function (error) {
+        console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
+    }
+});
+
+}
 
 // upload metadata
 function UploadMD(){
@@ -345,7 +453,7 @@ function UploadMD(){
 	var mdActivity = document.getElementById("data-context-add").value;
 	var mdTimeC = $('#mdTc').datepicker({ dateFormat: 'yy-mm-dd' }).val();
 	var mdTimef = $( '#mdTf' ).datepicker({ dateFormat: 'yy-mm-dd' }).val();
-	var mdPermi = document.getElementById("dtacselect").value;
+	var mdPermi = document.getElementById("dtacselect").value == 'true';
 	var mdRel = document.getElementById("MDorg").value;
 	var mdDesc = document.getElementById("mdDes").value;
 	var mdExtLink = document.getElementById("mdEL").value;
@@ -360,27 +468,13 @@ function UploadMD(){
         'target_object': '', // for LINKED datasets
         'description': mdDesc, // max 1000 characters
         'start-date': mdTimeC +' 12:12:12', // format: yyyy-MM-dd HH:mm:ss
+        'isPublic': false,//mdPermi, // or false
         'end-date': mdTimef +' 12:12:12', // format: yyyy-MM-dd HH:mm:ss
-        'isPublic': mdPermi, // or false
         'keywords': mdActivity, // comma-separated, max 255 characters
         'doi': mdExtLink, // the digital object identifier of this dataset, if available
         'relation': mdRel, // refer to a related dataset, publication or journal article
-        'organization': mdMeans, // organizations involved in this project / dataset creation
-        'remarks': mdPermi // max 1000 characters
-        
-		/*'dataset_name': mdTitle,
-        'dataset_type': 'LINKED', // or 'COMPLETE'
-        'target_object': mdExtLink, // for LINKED datasets
-        'description': mdDesc, // max 1000 characters
-        'start-date': mdTimeC, // format: yyyy-MM-dd HH:mm:ss
-        'end-date': d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear(), // format: yyyy-MM-dd HH:mm:ss
-        'isPublic': true, // or false
-        'keywords': mdContext, // comma-separated, max 255 characters
-        'doi': mdMeans, // the digital object identifier of this dataset, if available
-        'relation': mdActivity, // refer to a related dataset, publication or journal article
-        'organization': 'TU/e ID, Fontys, UMCU', // organizations involved in this project / dataset creation
-        'remarks': mdDesc // max 1000 characters
-		*/
+        'organization': 'VitalityDataCentre', // organizations involved in this project / dataset creation
+        'remarks': mdMeans // max 1000 characters
     },
     headers: {
         'api-key': '12345',
@@ -394,6 +488,7 @@ function UploadMD(){
     },
     error: function (error) {
         console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
     }
 });
 	
@@ -426,7 +521,7 @@ function ToggleDLM(DLdata){
 		//0 dataset ID; 1 title; 2 type; 3 target; 4 description; 5 keywords; 6 doi; 7 relation; 8 organization;
 		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 project ID;
 		var n = Object.keys(sgDataset);
-		var d = sgDataset[n[16]];
+		var d = sgDataset[n[17]];
 		var table = document.querySelector(".DLTable");
 		var i;
 		var html = `<thead>
@@ -443,7 +538,7 @@ function ToggleDLM(DLdata){
 			console.log(fStr);
 			var des = d[i][Object.keys(d[i])[2]];
 			var t = new Date(d[i][Object.keys(d[i])[0]]);
-			var date = t.getDate() + "-" + (t.getMonth()+1) + "-" + t.getFullYear();
+			var date = t.getFullYear() + "-" + (t.getMonth()+1) + "-" + t.getDate();
 	  var li = `
 		<tbody>
    			<tr>
@@ -460,6 +555,7 @@ function ToggleDLM(DLdata){
     },
     error: function (error) {
         console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
     }
 });
 	
@@ -577,8 +673,126 @@ $('#dlBtn').click(function(){
     },
     error: function (error) {
         console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
     }
 });
 });
+
+
+// load user 
+function datainfoload(val){
+	$.ajax({
+    url: 'https://131.155.21.235/api/v1/searchds/' + val + '/VitalityDataCentre',
+    type: 'GET',
+    headers: {
+        'api-key': '12345',
+		'api-token': api_token
+    },
+    success: function (result) {
+		console.log(result);
+		var secondKey = Object.keys(result)[1];
+		var dataID = result[secondKey];
+		var dataKey = Object.keys(dataID)[0];
+		var dataSM = dataID[dataKey];
+		let html = "";
+		dataSM.forEach(function(element){
+			$.ajax({
+				url: 'https://131.155.21.235/api/v1/datasets/' + element, 
+				type: 'GET',
+    headers: {
+        'api-key': '12345',
+        'api-token': api_token
+    },
+    success: function (allDatasets) {
+        var datasetKey = Object.keys(allDatasets)[1];
+		console.log(allDatasets[datasetKey]);
+		var sgDataset = allDatasets[datasetKey];  
+		//0 dataset ID; 1 title; 2 type; 3 target; 4 description; 5 keywords; 6 doi; 7 relation; 8 organization;
+		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 public/unpublic; 16 project ID;
+		var n = Object.keys(sgDataset);
+		var d = new Date(sgDataset[n[13]]);
+		var d2 = new Date(sgDataset[n[11]]);
+		var d1 = new Date(sgDataset[n[12]]);
+		var stDate = d1.getFullYear() + "-" + (d1.getMonth()+1) + "-" + d1.getDate();
+		var edDate = d.getFullYear() + "-" + (d.getMonth()+1) + "-" + d.getDate();
+		var ulDate = d2.getFullYear() + "-" + (d2.getMonth()+1) + "-" + d2.getDate();
+		var dlInfo;
+		var li;
+		if (sgDataset[n[17]] == null || sgDataset[n[17]].length == 0){
+			dlInfo = "no dataset uploaded yet...";
+			 li = `        								
+				<div class="metadata-card">
+					<div class="collapsible">
+						<img class="metaFig" src= ${"images/" + sgDataset[n[15]] + ".png"} height="27" alt="">
+						<img class="metaFig" src= ${"images/" + sgDataset[n[9]] + ".png"} height="27" alt="">
+						<img class="metaFig" src= ${"images/"+ sgDataset[n[2]] +".png"} height="27" alt="">
+					</div>
+					<div class="metadata-content"> 
+						<div class="data-title">
+							<img src= ${"images/" + sgDataset[n[5]] + ".png"} width="60" alt="">
+							<h4>${sgDataset[n[1]]}</h4>
+						</div>
+						<div class="metadata-dsc">
+							<p>
+							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
+							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
+							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
+							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
+							<b>Original resource/unique identifier:</b><br><a href= ${sgDataset[n[6]]} target="_blank">${sgDataset[n[6]]}</a><br><br>
+							${dlInfo}</p>	
+						</div>
+					</div>
+				</div>
+			`;
+		} else {
+			dlInfo = sgDataset[n[17]].length + " dataset(s) have been uploaded";
+			 li = `        								
+				<div class="metadata-card">
+					<div class="collapsible">
+						<img class="metaFig" src= ${"images/" + sgDataset[n[15]] + ".png"} height="27" alt="">
+						<img class="metaFig" src= ${"images/" + sgDataset[n[9]] + ".png"} height="27" alt="">
+						<img class="metaFig" src= ${"images/"+ sgDataset[n[2]] +".png"} height="27" alt="">
+					</div>
+					<div class="metadata-content"> 
+						<div class="data-title">
+							<img src= ${"images/" + sgDataset[n[5]] + ".png"} width="60" alt="">
+							<h4>${sgDataset[n[1]]}</h4>
+						</div>
+						<div class="metadata-dsc">
+							<p>
+							<b>Description:</b><br><${sgDataset[n[4]]}<br><br>
+							<b>Dataset owner:</b><br>${sgDataset[n[7]]}<br><br>
+							<b>Time period covered:</b><br>${stDate + " to " + edDate}<br><br>
+							<b>Created by:</b><br>${sgDataset[n[14]] + " on " + ulDate} <br><br>							
+							<b>Original resource/unique identifier:</b><br><a href= ${sgDataset[n[6]]} target="_blank">${sgDataset[n[6]]}</a><br><br>
+							${dlInfo}</p>
+						</div>
+						<div class="metadata-link">
+							<button onClick = "ToggleDLM(${sgDataset[n[0]]})">Download file(s)</button>
+						</div>
+					</div>
+				</div>
+			`;
+		}
+	html += li;
+	document.querySelector(".metadata-container").innerHTML = html;	
+    },
+    error: function (error) {
+        console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
+    }
+});
+				
+			
+		});
+		
+    },
+    error: function (error) {
+        console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
+    }
+});
+
+}
 
 

@@ -145,119 +145,31 @@ body{
 	display: block;
 }
 
-
-.page-menu{
-	margin: 0;
-	width: 320px;
-	height: 150%;
-	background-color: black;
-	position:fixed;
-	overflow: hidden;
-}
-
-.VDC-banner{
-	height: 140px;
-}
-.user-menu{
-	color: white;
-	margin-top: 20px;
-}
-.user-menu img{
-	float: left;
-	margin-top: 10px;
-	margin-left: 25px;
-}
-
-.user-info{
-	align-content: center;
-}
-.user-info h2{
-	margin-left: 20px;
-	float: left;
-	font-size: 14pt;
-}
-.user-info button{
-	float: right;
-	width: 50px;
-	height: 25px;
-	margin-top: 15px;
-	margin-right: 25px;
-	border-radius: 5px;
-	color: white;
-	text-decoration: none;
-	background-color: black;
-	border-style: solid;
-	text-align: center;
-	border-color: white;
-	border-width: 0.5px;
-	cursor: pointer;
-}
-.user-info button:hover{
-	background-color: white;
-	color: black;
-}
-
-
-nav ul{
-	margin-left: 60px;
-	padding-left: 0px;
-	padding-top: 50px;
-	list-style-type: none;
-	padding-bottom: 40px;
-}
-nav a{
-	align-content: center;
-	width: 270px;
-	text-decoration: none;
-	color: white;
-	font-size: 14pt;
-	display: block;
-	padding-bottom: 20px;
-	padding-top: 20px;
-	padding-left: 20px;
-	margin-top: 5px;
-	margin-bottom: 6px;
-	
-}
-.line-hover{
-	display: none;
-}
-nav hr{
-	width: 75px;
-	float: right;
-	margin-top: 12px;
-	}
-nav a:hover{
-	color: #0099DC;
-	font-weight: lighter;
-}
-nav a:hover .line-hover{
-	display: block;
-}
-.VDC-contact{
-	margin-left: 25px;
-	padding-top: 0px;
-	border-top: 1px solid #ddd;
-	color: white;
-	font-size: 12px;
-	font-weight: 100;
-}
-.VDC-support{
-	margin-bottom: 10px;
-	float: left;
-	margin-right: 15px;
-}
-
-
 .search-engine{
-	height: 150px;
-	background-color: white;
+	height: 70px; /*150px;*/
+	background-color: black;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.3);
-	left: 320px;
+	left: 0; /*320px;*/
 	right: 0;
 	position: fixed;
 	z-index: 1;
 }
+
+.VDC-banner{
+	padding-left: 20px;
+	float: left;
+	
+}
+
+.banner-div{
+	float: left;
+	width: 80px;
+	margin-top: 15px;
+	height: 40px;
+	border-right: 2px solid gray;
+}
+
+/*
 .search-engine button{
 	margin-top: 25px;
 	margin-right: 45px;
@@ -298,13 +210,21 @@ nav a:hover .line-hover{
 .search-bar input:hover{
 	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
 }
+
+*/
+
 .filter{
 	margin-top: 10px;
-	padding-left: 65px;
+	height: 60px;
+	padding-left: 60px;
 	align-content: center;
 	overflow: hidden;
-	
 }
+
+
+
+
+/*
 .filter p{
 	font-size: 12pt;
 	float: left;
@@ -332,9 +252,140 @@ nav a:hover .line-hover{
 	background-size: auto 8px;
 	background-position: right center;
 }
+*/
+
+.banner-div2{
+	float: left;
+	width: 1px;
+	margin-top: 5px;
+	margin-right: 40px;
+	height: 40px;
+	border-right: 1px dotted white;
+
+}
+
+.banner-div3{
+	float: left;
+	width: 20px;
+	margin-top: 5px;
+	height: 40px;
+	border-right: 2px solid gray;
+
+}
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  float: left;
+  padding-left: 35px;
+  margin-right: 40px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-size: 11pt;
+  margin-top: 15px;
+  color: white;	
+}
+
+/* Hide the browser's default radio button */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #FFCD34;
+}
+
+.container:hover {
+  color: #FFCD34;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: white;
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the indicator (dot/circle) */
+.container .checkmark:after {
+ 	top: 6px;
+	left: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: #FFCD34;
+}
+
+
+.filter button{
+	float: right;
+	width: 50px;
+	height: 25px;
+	margin-top: 15px;
+	right: 25px;
+	border-radius: 5px;
+	color: white;
+	text-decoration: none;
+	background-color: black;
+	border-style: solid;
+	text-align: center;
+	border-color: white;
+	border-width: 0.5px;
+	cursor: pointer;
+	position: fixed;
+}
+.filter button:hover{
+	background-color: white;
+	color: black;
+}
+
+.filter h2{
+	color: white;
+	float: right;
+	margin-top: 18px;
+	font-size: 11pt;
+	position: fixed;
+	right: 150px;
+}
+
+.filter img{
+	position: fixed;
+	margin-top: 5px;
+	margin-left: 0px;
+	right: 250px;
+}
+
+
 .data-index{
-	margin-left: 320px;
-	padding-right: 45px;
+	margin-left: 0; /*320px*/
+	padding-right: 25px;
 	padding-top: 25px;
 	overflow: auto;
 	height: auto;
@@ -343,10 +394,10 @@ nav a:hover .line-hover{
 
 .metadata-container{
 	width: 90%;
-	margin-top: 150px;
+	margin-top: 70px;/*150px;*/
 	column-width:300px;
 	column-gap: 25px;
-	margin-left: 45px;
+	margin-left: 25px;
 }
 
 .metadata-card{
@@ -388,23 +439,33 @@ nav a:hover .line-hover{
 
 .data-title h4{
 	padding-right: 20px;
+	padding-top: 20px;
 }
 
 .data-title img{
 	float: left;
-	margin-right: 10px;
+	margin-right: 20px;
 	margin-top: 5px;
 }
 
 .metadata-dsc {
 	display: block;
-	margin-left: 20px;
-	margin-right: 20px;
-	margin-top: 40px;
+	margin-left: 30px;
+	margin-right: 30px;
+	margin-top: 60px;
 	margin-bottom: 40px;
 	font-size: 10pt;
-	font-weight:lighter;
 } 
+
+.metadata-dsc b{
+	color: #404040;
+	
+	line-height: 25px;
+}
+
+.metadata-dsc p{
+	line-height: 20px;
+}
 
 .metadata-link button{
 	cursor: pointer;
@@ -696,6 +757,23 @@ nav a:hover .line-hover{
 	color: white;
 }
 
+.editModal{
+	border-width: 15px 15px 15px 15px;
+	border-style: solid;
+	border-color: gray transparent transparent gray;
+	background-color: transparent;
+	margin-left: -20px;
+	margin-top: 0;
+	width: 0;
+	height: 0;
+	display: inline-block;
+}
+
+.editModal:hover{
+	border-width: 18px 18px 18px 18px;
+	border-color: #0099DC transparent transparent #0099DC;
+}
+
 .cancModal{
 	float: right;
 	right: 200px;
@@ -708,7 +786,7 @@ nav a:hover .line-hover{
 	
 }
 
-.cancModal:hover{
+.cancModal:hover {
 	color: #0099DC;
 }
 
@@ -727,4 +805,13 @@ nav a:hover .line-hover{
 	.metadata-container{margin-top: 0;}
 	.search-engine {display: none;}
 	.user-menu_1{width: 80%;}
+}
+
+@media screen and (max-width: 1280px) {
+	.profile-id, .profile-img, .banner-div2{display: none;}
+	.banner-div{width: 10px;}
+	.container {font-size: 9pt; margin-right: 20px;}
+	.filter{padding-left: 20px;}
+
+
 }

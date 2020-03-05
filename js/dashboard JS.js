@@ -13,12 +13,20 @@ function CloseADM() {
   modal.style.display = "none";
 }
 
+function CloseEDM(){
+	var modal2 = document.getElementById("editdata-modal");
+	modal2.style.display = "none";
+}
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
   var modal = document.getElementById("adddata-modal");
+  var modal2 = document.getElementById("editdata-modal");
   if (event.target === modal) {
     modal.style.display = "none";
+  }
+  if (event.target === modal2) {
+    modal2.style.display = "none";
   }
 };
 
