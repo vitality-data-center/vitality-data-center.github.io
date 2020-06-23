@@ -76,7 +76,7 @@ function cookieCheck(){
 
 function usLogin(user, password){
 		$.ajax({
-    url: 'https://131.155.21.235/api/v1/login',
+    url: 'https://df-staging.id.tue.nl/api/v1/login',
     type: 'POST',
     data: {
         'username': user,
@@ -125,7 +125,7 @@ function loginCheck(){
 	var userPss = document.getElementById("password_field").value;
 	
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/login',
+    url: 'https://df-staging.id.tue.nl/api/v1/login',
     type: 'POST',
     data: {
         'username': userEmail,
@@ -167,7 +167,7 @@ function createAccount(){
 	var newlsNm = document.getElementById("create_lsName").value;
 	
 	$.ajax({
-    	url: ' https://131.155.21.235/api/v1/user/register',
+    	url: ' https://df-staging.id.tue.nl/api/v1/user/register',
 		type: 'POST',
     	data: {
         	'email': newEmail,
@@ -197,7 +197,7 @@ function createAccount(){
 // logout from the current user
 function logoutCheck(){
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/logout',
+    url: 'https://df-staging.id.tue.nl/api/v1/logout',
     type: 'GET',
     headers: {
         'api-key': '12345'
@@ -227,7 +227,7 @@ function logoutCheck(){
 // load user 
 function userInfoLoad(){
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/datasets',
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets',
     type: 'GET',
     headers: {
         'api-key': '12345',
@@ -243,7 +243,7 @@ function userInfoLoad(){
 		let html = "";
 		dataSM.forEach(function(element){
 			$.ajax({
-				url: 'https://131.155.21.235/api/v1/datasets/' + element, 
+				url: 'https://df-staging.id.tue.nl/api/v1/datasets/' + element, 
 				type: 'GET',
     headers: {
         'api-key': '12345',
@@ -353,7 +353,7 @@ function ToggleEDM(getData){
 	modal.style.display = "block";
 	upload_token = getData
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/datasets/' + getData, //the id of the dataset
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/' + getData, //the id of the dataset
     type: 'GET',
     headers: {
         'api-key': '12345',
@@ -410,7 +410,7 @@ function editMD(){
 	}
 
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/datasets/edit/' + upload_token,
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/edit/' + upload_token,
     type: 'POST',
     data: {
         'project_id': '', // id of project this dataset will be linked to, can be empty if there is only project for this user
@@ -459,7 +459,7 @@ function UploadMD(){
 	var mdExtLink = document.getElementById("mdEL").value;
 	
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/datasets/add',
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/add',
     type: 'POST',
     data: {
         'project_id': '', // id of project this dataset will be linked to, can be empty if there is only project for this user
@@ -509,7 +509,7 @@ function ToggleDLM(DLdata){
 	modal.style.display = "block";
 	
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/datasets/' + DLdata, // 17 is the id of the dataset
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/' + DLdata, // 17 is the id of the dataset
     type: 'GET',
     headers: {
         'api-key': '12345',
@@ -568,7 +568,7 @@ function DLfile(projectID, flID){
 	console.log(x);
 	$.ajax({
 	// 17 is the id of the dataset, filename the name of the file to download
-    url: 'https://131.155.21.235/api/v1/datasets/download/' + projectID + '/' + x, 
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/download/' + projectID + '/' + x, 
     type: 'GET',
 	xhrFields: {
             responseType: 'blob'
@@ -611,7 +611,7 @@ var uploadState = function(){
 $('#submitBtn').click(function(e) {
 			var form_data = new FormData($('#uploadDTFiles')[0]);
 			$.ajax({
-				url: 'https://131.155.21.235/api/v1/datasets/upload/' + upload_token,
+				url: 'https://df-staging.id.tue.nl/api/v1/datasets/upload/' + upload_token,
 				type: 'POST',
 				data: form_data,
 				contentType: false,
@@ -652,7 +652,7 @@ function CloseSRM() {
 $('#dlBtn').click(function(){
 	$.ajax({
 	// 17 is the id of the dataset, filename the name of the file to download
-    url: 'https://131.155.21.235/api/v1/datasets/download/25/test.txt', 
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/download/25/test.txt', 
     type: 'GET',
 	xhrFields: {
             responseType: 'text'
@@ -682,7 +682,7 @@ $('#dlBtn').click(function(){
 // load user 
 function datainfoload(val){
 	$.ajax({
-    url: 'https://131.155.21.235/api/v1/searchds/' + val + '/VitalityDataCentre',
+    url: 'https://df-staging.id.tue.nl/api/v1/searchds/' + val + '/VitalityDataCentre',
     type: 'GET',
     headers: {
         'api-key': '12345',
@@ -697,7 +697,7 @@ function datainfoload(val){
 		let html = "";
 		dataSM.forEach(function(element){
 			$.ajax({
-				url: 'https://131.155.21.235/api/v1/datasets/' + element, 
+				url: 'https://df-staging.id.tue.nl/api/v1/datasets/' + element, 
 				type: 'GET',
     headers: {
         'api-key': '12345',
