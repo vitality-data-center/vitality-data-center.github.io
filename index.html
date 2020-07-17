@@ -11,6 +11,9 @@
 	<script src="js/js.cookie.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="js/dashboard JS.js"></script>
+	<link rel="stylesheet" href="leaflet/leaflet.css" crossorigin=""/>
+	<script src="leaflet/leaflet.js"  crossorigin=""></script>
+	<script src="sample-geojson.js"></script>
 	<script>
   $( function() {
     $( '#mdTc' ).datepicker({ dateFormat: 'yy-mm-dd' });
@@ -136,6 +139,7 @@
 		</section>
 		-->
 		<section class="dashboard-main">
+			<div id="map" style="width: 600px; height: 400px"></div>
 			<div class="search-engine">
 				<div class="VDC-banner">
 					<img src="images/VDC_logo-04.png" width="150" height="70" alt="">
@@ -210,19 +214,21 @@
 				<h2 class="profile-id" id="userAccount">
 				Xipei Ren
 				</h2>
-				<button onclick="logoutCheck()" type="button">logout</button>
+				<button onclick="createmap()" type="button">logout</button>
 			</div>
 			
 		</div>
 			
 			
 			<div class="data-index">
+
 				<div class="metadata-container" id="mtdCard">
 				</div>
 				<div class="add-data">
 				<button onClick="ToggleADM()">+</button>
 				<li><a href="https://www.tue.nl/en/storage/privacy/" target="_blank">privacy policy  |  terms of service</a></li>
-			</div>
+				</div>
+
 			</div>
 		</section>
 	</main>
@@ -400,6 +406,7 @@
 		</div>
 	</div>
 </body>
-	<script src="js/dashboard_api.js" type="text/javascript"></script>
 
+	<script src="js/dashboard_api.js" type="text/javascript"></script>
+    <script src="js/map_api.js" type="text/javascript"></script>
 </html>

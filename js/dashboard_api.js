@@ -1,4 +1,5 @@
 // JavaScript Document
+// JavaScript Document
 
 
 //user permission
@@ -51,6 +52,8 @@ var upload_token;
 var valData1 = "complete";
 var valData2 = "movement";
 var valData3 = "all";
+
+
 
 function cookieCheck(){
 	var a = Cookies.get('usname');
@@ -561,8 +564,51 @@ function ToggleDLM(DLdata){
 	
 }
 
-//download data
+
+function onEachFeature(feature, layer) {
+	var popupContent = "<p>I started out as a GeoJSON " +
+		feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+
+	if (feature.properties && feature.properties.popupContent) {
+		popupContent += feature.properties.popupContent;
+	}
+
+	layer.bindPopup(popupContent);
+}
+
+//show data on map
 function DLfile(projectID, flID){
+	var p = projectID + '-' + flID;
+	var x = document.getElementById(p).innerHTML;
+	console.log(x);
+	$.ajax({
+		// 17 is the id of the dataset, filename the name of the file to download
+		url: 'https://df-staging.id.tue.nl/api/v1/datasets/download/' + projectID + '/' + x,
+		type: 'GET',
+		xhrFields: {
+			responseType: 'text'
+		},
+		headers: {
+			'api-key': '12345',
+			'api-token': api_token
+		},
+		success: function (data) {
+			data_json = JSON.parse(data)
+			L.geoJson([data_json], {
+				style: myStyle,
+				onEachFeature: onEachFeature
+			}).addTo(map);
+
+		},
+		error: function (error) {
+			console.error(error);
+		}
+	});
+
+}
+
+//download data
+function DLfile2(projectID, flID){
 	var p = projectID + '-' + flID;
 	var x = document.getElementById(p).innerHTML;
 	console.log(x);
