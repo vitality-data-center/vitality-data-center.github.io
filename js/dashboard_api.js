@@ -548,7 +548,7 @@ function ToggleDLM(DLdata){
        			<td id="${fStr}">${f}</td>
       			<td>${des}</td>
        			<td>${date}</td>
-				<td><button onClick="DLfile(${DLdata}, ${i})">download</button></td>
+				<td><button onClick="DLfile2(${DLdata}, ${i})">download</button></td>
    		    </tr>		
 		</tbody>
 	  `;		
