@@ -712,27 +712,27 @@ body{
 	background-color: #70C3D0;
 }
 
-.DLTable{
+.DLTable, .DLTableM{
 	width: 100%;
 	margin-bottom: 50px;
 	font-size: 10pt;
 }
 
-.DLTable th, td {
+.DLTable th, td, .DLTableM th, td {
   border-bottom: 1px dotted #ddd;
 }
-.DLTable th {
+.DLTable th, .DLTableM th {
 	text-align: left;
 	height: 50px;
 }
 
-.DLTable td {
+.DLTable td, .DLTableM td {
 	vertical-align: middle;
 	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
-.DLTable tr:hover {
+.DLTable tr:hover, .DLTableM tr:hover {
 	background-color: #f5f5f5;
 }
 

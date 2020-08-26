@@ -548,7 +548,7 @@ function ToggleDLM(DLdata){
        			<td id="${fStr}">${f}</td>
       			<td>${des}</td>
        			<td>${date}</td>
-				<td><button onClick="DLfile(${DLdata}, ${i})">download</button></td>
+				<td><button onClick="DLfile2(${DLdata}, ${i})">download</button></td>
    		    </tr>		
 		</tbody>
 	  `;		
@@ -899,7 +899,7 @@ function mapDatalist(DLdata){
 		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 project ID;
 		var n = Object.keys(sgDataset);
 		var d = sgDataset[n[17]];
-		var table = document.querySelector(".DLTable");
+		var table = document.querySelector(".DLTableM");
 		var i;
 		var html = `<thead>
 						<tr>
