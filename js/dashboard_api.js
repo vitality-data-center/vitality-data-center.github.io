@@ -1,4 +1,5 @@
 // JavaScript Document
+// JavaScript Document
 
 
 //user permission
@@ -51,6 +52,8 @@ var upload_token;
 var valData1 = "complete";
 var valData2 = "movement";
 var valData3 = "all";
+
+
 
 function cookieCheck(){
 	var a = Cookies.get('usname');
@@ -561,8 +564,51 @@ function ToggleDLM(DLdata){
 	
 }
 
-//download data
+
+function onEachFeature(feature, layer) {
+	var popupContent = "<p>I started out as a GeoJSON " +
+		feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+
+	if (feature.properties && feature.properties.popupContent) {
+		popupContent += feature.properties.popupContent;
+	}
+
+	layer.bindPopup(popupContent);
+}
+
+//show data on map
 function DLfile(projectID, flID){
+	var p = projectID + '-' + flID;
+	var x = document.getElementById(p).innerHTML;
+	console.log(x);
+	$.ajax({
+		// 17 is the id of the dataset, filename the name of the file to download
+		url: 'https://df-staging.id.tue.nl/api/v1/datasets/download/' + projectID + '/' + x,
+		type: 'GET',
+		xhrFields: {
+			responseType: 'text'
+		},
+		headers: {
+			'api-key': '12345',
+			'api-token': api_token
+		},
+		success: function (data) {
+			data_json = JSON.parse(data)
+			L.geoJson([data_json], {
+				style: style,
+				onEachFeature: onEachFeature
+			}).addTo(map);
+
+		},
+		error: function (error) {
+			console.error(error);
+		}
+	});
+
+}
+
+//download data
+function DLfile2(projectID, flID){
 	var p = projectID + '-' + flID;
 	var x = document.getElementById(p).innerHTML;
 	console.log(x);
@@ -776,6 +822,9 @@ function datainfoload(val){
 		}
 	html += li;
 	document.querySelector(".metadata-container").innerHTML = html;	
+	document.getElementById("map").style.display = "none";
+	document.getElementById("mapData").style.display = "none";
+	document.getElementById("mtdCard").style.display = "block";
     },
     error: function (error) {
         console.error(error);
@@ -794,5 +843,126 @@ function datainfoload(val){
 });
 
 }
+
+
+
+var myStyle = {
+    "color": "#ff7800",
+    "weight": 5,
+    "opacity": 0.65
+};
+var map;
+
+function style(feature) {
+    return {
+        fillColor: getColor(feature.properties.pm25_avg),
+        weight: 2,
+        opacity: 1,
+        color: 'white',
+        dashArray: '3',
+        fillOpacity: 0.7
+    };
+}
+
+
+function createmap(){
+	mapDatalist(97);
+    document.getElementById("map").style.display = "block";
+    document.getElementById("mapData").style.display = "block";
+    document.getElementById("mtdCard").style.display = "none";
+        map = L.map('map').setView([51.4416, 5.4697], 13);
+    var addis = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        id: 'addis',
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    }).addTo(map);
+
+
+    L.geoJson(coorsField, {
+        style: style,
+        onEachFeature: onEachFeature
+    }).addTo(map);
+}
+
+function mapDatalist(DLdata){
+	
+	$.ajax({
+    url: 'https://df-staging.id.tue.nl/api/v1/datasets/' + DLdata, // 17 is the id of the dataset
+    type: 'GET',
+    headers: {
+        'api-key': '12345',
+        'api-token': api_token
+    },
+    success: function (data) {
+		var datasetKey = Object.keys(data)[1];
+		var sgDataset = data[datasetKey];  
+		//0 dataset ID; 1 title; 2 type; 3 target; 4 description; 5 keywords; 6 doi; 7 relation; 8 organization;
+		//9 remarks; 10 license; 11 creation date; 12 start date; 13 end date; (14 data: 1 time; 2 name; 3 description) 14 owner; 15 project ID;
+		var n = Object.keys(sgDataset);
+		var d = sgDataset[n[17]];
+		var table = document.querySelector(".DLTable");
+		var i;
+		var html = `<thead>
+						<tr>
+							<th>File name</th>
+							<th>Description</th>
+							<th>Uploaded at</th>
+							<th>Add to the map</th>
+						</tr>
+					</thead>`;
+		for(i=0; i < d.length; i++){
+			var f = d[i][Object.keys(d[i])[1]];
+	    	var fStr = DLdata + '-' + i;
+			console.log(fStr);
+			var des = d[i][Object.keys(d[i])[2]];
+			var t = new Date(d[i][Object.keys(d[i])[0]]);
+			var date = t.getFullYear() + "-" + (t.getMonth()+1) + "-" + t.getDate();
+	  var li = `
+		<tbody>
+   			<tr>
+       			<td id="${fStr}">${f}</td>
+      			<td>${des}</td>
+       			<td>${date}</td>
+				<td><button onClick="DLfile(${DLdata}, ${i})">Add</button></td>
+   		    </tr>		
+		</tbody>
+	  `;		
+	  html += li;
+	  table.innerHTML = html;	
+		}
+    },
+    error: function (error) {
+        console.error(error);
+        window.alert("oops... something went wrong, please try it again!");
+    }
+});
+	
+}
+
+
+function getColor(d) {
+    return d > 18.2 ? '#800026' :
+        d > 18.0  ? '#BD0026' :
+            d > 17.8  ? '#E31A1C' :
+                d > 17.6  ? '#FC4E2A' :
+                    d > 17.4   ? '#FD8D3C' :
+                        d > 17.2   ? '#FEB24C' :
+                            d > 17   ? '#FED976' :
+                                '#FFEDA0';
+}
+
+function onEachFeature(feature, layer) {
+    var popupContent = "PM2.5 = ";
+
+    if (feature.properties && feature.properties.pm25_avg) {
+        popupContent += feature.properties.pm25_avg;
+    }
+
+
+    layer.bindPopup(popupContent);
+}
+
+
+
+
 
 
