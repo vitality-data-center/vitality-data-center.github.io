@@ -595,7 +595,7 @@ function DLfile(projectID, flID){
 		success: function (data) {
 			data_json = JSON.parse(data)
 			L.geoJson([data_json], {
-				style: myStyle,
+				style: style,
 				onEachFeature: onEachFeature
 			}).addTo(map);
 
